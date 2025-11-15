@@ -1,0 +1,21 @@
+# ============================
+# Arquivos/pastas do IntelliJ
+# ============================
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# ============================
+# Pastas de build/compilação
+# ============================
+/out/
+/target/
+/build/
+
+# Logs
+*.log
+
+# Sistema operacional (Windows / macOS)
+.DS_Store
+Thumbs.db
