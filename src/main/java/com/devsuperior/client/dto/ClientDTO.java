@@ -1,5 +1,7 @@
 package com.devsuperior.client.dto;
 
+import com.devsuperior.client.entities.Client;
+
 import java.time.LocalDate;
 
 public class ClientDTO {
@@ -11,6 +13,9 @@ public class ClientDTO {
     private LocalDate birthDate;
     private Integer children;
 
+    public ClientDTO() {
+    }
+
     public ClientDTO(Long id, String name, String cpf, Double income, LocalDate birthDate, Integer children) {
         this.id = id;
         this.name = name;
@@ -20,7 +25,13 @@ public class ClientDTO {
         this.children = children;
     }
 
-    public ClientDTO() {
+    public ClientDTO(Client client) {
+        this.id = client.getId();
+        this.name = client.getName();
+        this.cpf = client.getCpf();
+        this.income = client.getIncome();
+        this.birthDate = client.getBirthDate();
+        this.children = client.getChildren();
     }
 
     public Long getId() {
