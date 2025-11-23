@@ -48,6 +48,7 @@ public class ClientService {
     public ClientDTO insert(ClientDTO clientDTO) {
 
         Client client = new Client();
+
         client.setName(clientDTO.getName());
         client.setCpf(clientDTO.getCpf());
         client.setIncome(clientDTO.getIncome());
