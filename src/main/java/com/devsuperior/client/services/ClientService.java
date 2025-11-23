@@ -19,7 +19,7 @@ public class ClientService {
     private ClientRepository clientRepository;
 
     @Transactional(readOnly = true)
-    public ClientDTO findById(Long id) {
+    public ClientDTO findById(Long id) { // Este findById vai no banco de dados.
         Client client = clientRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Client not found. Id = " + id));
         return new ClientDTO(
@@ -48,15 +48,26 @@ public class ClientService {
     public ClientDTO insert(ClientDTO clientDTO) {
 
         Client client = new Client();
+        copyDtoToClient(clientDTO, client);
+        client = clientRepository.save(client);
+        return new ClientDTO(client);
+    }
 
+    @Transactional
+    public ClientDTO update(Long id, ClientDTO clientDTO) {
+
+        Client client = clientRepository.getReferenceById(id);
+        // objeto getReferenceById não vai direto ao banco de dados.
+        copyDtoToClient(clientDTO, client);
+        client = clientRepository.save(client);
+        return new ClientDTO(client);
+    }
+
+    private void copyDtoToClient(ClientDTO clientDTO, Client client) {
         client.setName(clientDTO.getName());
         client.setCpf(clientDTO.getCpf());
         client.setIncome(clientDTO.getIncome());
         client.setBirthDate(clientDTO.getBirthDate());
         client.setChildren(clientDTO.getChildren());
-
-        client = clientRepository.save(client);
-
-        return new ClientDTO(client);
     }
 }
